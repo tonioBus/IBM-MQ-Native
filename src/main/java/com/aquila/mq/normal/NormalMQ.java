@@ -19,7 +19,7 @@ import java.util.Hashtable;
 @Slf4j
 public class NormalMQ {
 
-    public static int LOOP = 100;
+    public static int LOOP = 1000;
 
     public static void main(String args[]) throws MQException, IOException, InterruptedException {
         log.info("test");
@@ -42,7 +42,7 @@ public class NormalMQ {
         }
         long startGet = System.currentTimeMillis();
         log.info("Get {} message", LOOP);
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < LOOP; i++) {
             MQMessage rcvMessage = new MQMessage();
             qag.get(rcvMessage, gmo);
         }

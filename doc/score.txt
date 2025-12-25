@@ -12,27 +12,27 @@ Java Full
 25-12-2025 12:38:01.325 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:61) - Delay Total       : 406
 --------------------------------------------------------------------------------------------
 Java full pre-open
-25-12-2025 12:47:28.736 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:53) - startOpen         : 1766663248595
-25-12-2025 12:47:28.736 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:54) - startPut          : 1766663248626
-25-12-2025 12:47:28.736 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:55) - startGet          : 1766663248689
-25-12-2025 12:47:28.736 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:56) - endGet            : 1766663248735
-25-12-2025 12:47:28.736 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:57) - endClose          : 1766663248736
-25-12-2025 12:47:28.737 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:58) - -------------------------------------------
-25-12-2025 12:47:28.737 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:59) - Delay Open        : 31
-25-12-2025 12:47:28.737 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:60) - Delay Put (100)    : 63
-25-12-2025 12:47:28.737 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:61) - Delay Get (100)    : 46
-25-12-2025 12:47:28.737 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:62) - Delay Close       : 1
-25-12-2025 12:47:28.737 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:63) - Delay Total       : 141
+25-12-2025 18:52:44.776 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:53) - startOpen         : 1766685164023
+25-12-2025 18:52:44.777 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:54) - startPut          : 1766685164055
+25-12-2025 18:52:44.777 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:55) - startGet          : 1766685164420
+25-12-2025 18:52:44.777 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:56) - endGet            : 1766685164775
+25-12-2025 18:52:44.777 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:57) - endClose          : 1766685164776
+25-12-2025 18:52:44.777 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:58) - -------------------------------------------
+25-12-2025 18:52:44.778 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:59) - Delay Open        : 32
+25-12-2025 18:52:44.778 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:60) - Delay Put (1000)    : 365
+25-12-2025 18:52:44.778 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:61) - Delay Get (1000)    : 355
+25-12-2025 18:52:44.778 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:62) - Delay Close       : 1
+25-12-2025 18:52:44.778 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:63) - Delay Total       : 753
 --------------------------------------------------------------------------------------------
 Java Native full
-25-12-2025 12:41:21.017 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:51) - startOpen         : 1766662880951
-25-12-2025 12:41:21.017 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:52) - startPut          : 1766662880963
-25-12-2025 12:41:21.017 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:53) - startGet          : 1766662880988
-25-12-2025 12:41:21.017 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:54) - endGet            : 1766662881017
-25-12-2025 12:41:21.017 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:55) - endClose          : 1766662881017
-25-12-2025 12:41:21.017 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:56) - -------------------------------------------
-25-12-2025 12:41:21.017 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:57) - Delay Open        : 12
-25-12-2025 12:41:21.017 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:58) - Delay Put (100)    : 25
-25-12-2025 12:41:21.018 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:59) - Delay Get (100)    : 29
-25-12-2025 12:41:21.018 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:60) - Delay Close       : 0
-25-12-2025 12:41:21.018 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:61) - Delay Total       : 66
+25-12-2025 18:52:17.818 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:53) - startOpen         : 1766685137249
+25-12-2025 18:52:17.818 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:54) - startPut          : 1766685137254
+25-12-2025 18:52:17.818 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:55) - startGet          : 1766685137524
+25-12-2025 18:52:17.818 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:56) - endGet            : 1766685137817
+25-12-2025 18:52:17.818 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:57) - endClose          : 1766685137817
+25-12-2025 18:52:17.818 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:58) - -------------------------------------------
+25-12-2025 18:52:17.818 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:59) - Delay Open        : 5
+25-12-2025 18:52:17.818 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:60) - Delay Put (1000)    : 270
+25-12-2025 18:52:17.818 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:61) - Delay Get (1000)    : 293
+25-12-2025 18:52:17.818 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:62) - Delay Close       : 0
+25-12-2025 18:52:17.818 INFO  [main] com.aquila.mq.normal.NormalMQ.main(NormalMQ.java:63) - Delay Total       : 568
