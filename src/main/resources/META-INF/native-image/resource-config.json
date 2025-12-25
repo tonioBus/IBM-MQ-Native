@@ -1,0 +1,48 @@
+{
+  "resources":{
+  "includes":[{
+    "pattern":"\\QMETA-INF/BuildInfo.properties\\E"
+  }, {
+    "pattern":"\\QMETA-INF/ccsid_merged.map\\E"
+  }, {
+    "pattern":"\\QMETA-INF/compinfo.properties\\E"
+  }, {
+    "pattern":"\\QMETA-INF/jmqiCharsets.dat\\E"
+  }, {
+    "pattern":"\\QMETA-INF/jmqiversion.properties\\E"
+  }, {
+    "pattern":"\\QMETA-INF/product.properties\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/org.apache.maven.surefire.spi.MasterProcessChannelProcessorFactory\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/org.junit.platform.engine.TestEngine\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/org.junit.platform.launcher.TestExecutionListener\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/org.slf4j.spi.SLF4JServiceProvider\\E"
+  }, {
+    "pattern":"\\Qcom/ibm/mq/jakarta/jms/version.properties\\E"
+  }, {
+    "pattern":"\\Qcom/ibm/msg/client/commonservices/j2se/version.properties\\E"
+  }, {
+    "pattern":"\\Qcom/ibm/msg/client/jakarta/jms/internal/version.properties\\E"
+  }, {
+    "pattern":"\\Qcom/ibm/msg/client/jakarta/wmq/factories/version.properties\\E"
+  }, {
+    "pattern":"\\Qcom/sun/jna/linux-x86-64/libjnidispatch.so\\E"
+  }, {
+    "pattern":"\\Qlogback.xml\\E"
+  }, {
+    "pattern":"jdk.jfr:\\Qjdk/jfr/internal/types/metadata.bin\\E"
+  }]},
+  "bundles":[{
+    "name":"com.ibm.mq.headers.internal.HeaderMessages",
+    "locales":["", "und"]
+  }, {
+    "name":"com.ibm.msg.client.commonservices.resources.JMSCS_MessageResourceBundle",
+    "locales":["", "und"]
+  }, {
+    "name":"mqji",
+    "locales":["", "und"]
+  }]
+}

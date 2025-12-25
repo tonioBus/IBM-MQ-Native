@@ -1,0 +1,8 @@
+[
+  {
+    "interfaces":["com.aquila.mq.jna.IBMMQJNA"]
+  },
+  {
+    "interfaces":["com.aquila.mq.jna.lib.IBMMQJNA"]
+  }
+]

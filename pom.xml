@@ -5,29 +5,77 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>JavaNative1</artifactId>
+    <artifactId>IBMMQNative</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>24</maven.compiler.source>
-        <maven.compiler.target>24</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <c.includePaths>src/main/c</c.includePaths>
         <JAVA_HOME>/home/t507062/.jdks/graalvm-jdk-24.0.2/</JAVA_HOME>
+        <jna.version>5.18.1</jna.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+            <version>${jna.version}</version>
+        </dependency>
 
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna-platform</artifactId>
+            <version>${jna.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ibm.mq</groupId>
+            <artifactId>com.ibm.mq.jakarta.client</artifactId>
+            <version>9.4.4.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.17</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.5.18</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.42</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>6.0.1</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
                 <configuration>
-                    <fork>true</fork>
+                    <argLine>-agentlib:native-image-agent=config-merge-dir=src/main/resources/META-INF/native-image
+                    </argLine>
                 </configuration>
             </plugin>
-            <plugin>
+
+            <!-- plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
@@ -47,21 +95,37 @@
                         <phase>generate-sources</phase>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.3.0</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>org.example.Main</mainClass>
-                            <addClasspath>true</addClasspath>
-                        </manifest>
-                    </archive>
-                </configuration>
+                <executions>
+                    <execution>
+                        <id>MainIBMMQJNA</id>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>com.aquila.mq.jna.MainIBMMQJNA</mainClass>
+                                    <addClasspath>true</addClasspath>
+                                </manifest>
+                            </archive>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>NormalMQTest</id>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>com.aquila.mq.normal.NormalMQTest</mainClass>
+                                    <addClasspath>true</addClasspath>
+                                </manifest>
+                            </archive>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
-            <plugin>
+            <!-- plugin>
                 <groupId>com.github.maven-nar</groupId>
                 <artifactId>nar-maven-plugin</artifactId>
                 <version>3.10.1</version>
@@ -70,7 +134,7 @@
                     <c>
                         <name>gcc</name>
                         <includes>
-                            <include>**/*.c</include>
+                            <include>**/c/*.c</include>
                         </includes>
                         <options>
                             <option>-DLAUNCHER_VERSION="${project.version}"</option>
@@ -100,7 +164,7 @@
                         <phase>compile</phase>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin -->
         </plugins>
     </build>
     <profiles>
@@ -115,11 +179,30 @@
                         <extensions>true</extensions>
                         <executions>
                             <execution>
-                                <id>build-native</id>
+                                <id>build-native-MainIBMMQJNA</id>
                                 <goals>
                                     <goal>compile-no-fork</goal>
                                 </goals>
                                 <phase>package</phase>
+                                <configuration>
+                                    <imageName>MainIBMMQJNA</imageName>
+                                    <mainClass>com.aquila.mq.jna.MainIBMMQJNA</mainClass>
+                                    <fallback>false</fallback>
+                                    <verbose>true</verbose>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>build-native-NormalMQ</id>
+                                <goals>
+                                    <goal>compile-no-fork</goal>
+                                </goals>
+                                <phase>package</phase>
+                                <configuration>
+                                    <imageName>NormalMQ</imageName>
+                                    <mainClass>com.aquila.mq.normal.NormalMQ</mainClass>
+                                    <fallback>false</fallback>
+                                    <verbose>true</verbose>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
