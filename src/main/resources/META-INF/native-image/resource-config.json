@@ -37,12 +37,12 @@
   }]},
   "bundles":[{
     "name":"com.ibm.mq.headers.internal.HeaderMessages",
-    "locales":["", "und"]
+    "locales":["und"]
   }, {
     "name":"com.ibm.msg.client.commonservices.resources.JMSCS_MessageResourceBundle",
-    "locales":["", "und"]
+    "locales":["und"]
   }, {
     "name":"mqji",
-    "locales":["", "und"]
+    "locales":["und"]
   }]
 }

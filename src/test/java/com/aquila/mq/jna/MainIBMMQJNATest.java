@@ -3,6 +3,7 @@ package com.aquila.mq.jna;
 import com.aquila.mq.jna.lib.IBMMQJNA;
 import com.aquila.mq.jna.lib.MQCD;
 import com.aquila.mq.jna.lib.MQCNO;
+import com.ibm.mq.constants.CMQC;
 import com.sun.jna.ptr.IntByReference;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -63,9 +64,20 @@ public class MainIBMMQJNATest {
         try {
             IBMMQJNA.INSTANCE.MQCONNX(new String(qmgrName), mqcno, hConn, compCode, reason);
 
-            // Vérifier le résultat
             if (compCode.getValue() == MQCC_FAILED) {
-                log.error("ERREUR: MQCONNX a échoué");
+                log.error("ERROR: MQCONNX failed");
+                log.error("  Completion Code: {}", compCode.getValue());
+                log.error("  Reason Code: {}", reason.getValue());
+                printReasonCode(reason.getValue());
+                System.exit(1);
+            }
+
+            byte[] mqcod = "DEV.QUEUE.1".getBytes(StandardCharsets.UTF_8);
+            int openOptions = CMQC.MQGMO_WAIT | CMQC.MQGMO_SYNCPOINT;
+            IntByReference pHobj = new IntByReference();
+            IBMMQJNA.INSTANCE.MQOPEN(hConn.getValue(), mqcod, openOptions, pHobj, compCode, reason);
+            if (compCode.getValue() == MQCC_FAILED) {
+                log.error("ERROR: MQOPEN failed");
                 log.error("  Completion Code: {}", compCode.getValue());
                 log.error("  Reason Code: {}", reason.getValue());
                 printReasonCode(reason.getValue());

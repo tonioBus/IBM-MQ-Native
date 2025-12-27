@@ -4,5 +4,8 @@
   },
   {
     "interfaces":["com.aquila.mq.jna.lib.IBMMQJNA"]
+  },
+  {
+    "interfaces":["java.lang.Runnable"]
   }
 ]

@@ -188,6 +188,18 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"com.intellij.junit6.JUnit6IdeaTestRunner",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.intellij.rt.debugger.agent.CaptureStorage",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"com.intellij.rt.execution.application.AppMainV2$Agent",
+  "methods":[{"name":"premain","parameterTypes":["java.lang.String","java.lang.instrument.Instrumentation"] }]
+},
+{
   "name":"com.sun.jna.CallbackProxy",
   "methods":[{"name":"callback","parameterTypes":["java.lang.Object[]"] }]
 },
