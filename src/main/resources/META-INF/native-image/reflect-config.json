@@ -78,6 +78,12 @@
   "fields":[{"name":"OPTIONS"}, {"name":"STRING_ENCODING"}, {"name":"STRUCTURE_ALIGNMENT"}, {"name":"TYPE_MAPPER"}]
 },
 {
+  "name":"com.aquila.mq.jna.MainIBMMQJNA",
+  "allDeclaredClasses":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicMethods":true
+},
+{
   "name":"com.aquila.mq.jna.MainIBMMQJNATest",
   "allDeclaredFields":true,
   "allDeclaredClasses":true,
@@ -87,14 +93,31 @@
   "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"testAllOperations","parameterTypes":[] }]
 },
 {
+  "name":"com.aquila.mq.jna.lib.IBMMQJNA",
+  "allDeclaredClasses":true,
+  "queryAllPublicMethods":true
+},
+{
   "name":"com.aquila.mq.jna.lib.MQCD",
   "allDeclaredFields":true,
+  "allDeclaredClasses":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicMethods":true,
   "fields":[{"name":"OPTIONS"}, {"name":"STRING_ENCODING"}, {"name":"STRUCTURE_ALIGNMENT"}, {"name":"TYPE_MAPPER"}]
 },
 {
   "name":"com.aquila.mq.jna.lib.MQCNO",
   "allDeclaredFields":true,
+  "allDeclaredClasses":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicMethods":true,
   "fields":[{"name":"OPTIONS"}, {"name":"STRING_ENCODING"}, {"name":"STRUCTURE_ALIGNMENT"}, {"name":"TYPE_MAPPER"}]
+},
+{
+  "name":"com.aquila.mq.jna.lib.MQCNO$ByReference",
+  "allDeclaredClasses":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicMethods":true
 },
 {
   "name":"com.aquila.mq.normal.MainIBMMQJNATest",
@@ -104,6 +127,12 @@
   "queryAllPublicMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"testAllOperations","parameterTypes":[] }]
+},
+{
+  "name":"com.aquila.mq.normal.NormalMQ",
+  "allDeclaredClasses":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicMethods":true
 },
 {
   "name":"com.aquila.mq.normal.NormalMQTest",
@@ -122,6 +151,10 @@
   "queryAllPublicMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"testSend","parameterTypes":[] }]
+},
+{
+  "name":"com.ibm.mq.constants.MQConstants",
+  "allPublicFields":true
 },
 {
   "name":"com.ibm.mq.ese.jmqi.ESEJMQI",
@@ -204,8 +237,27 @@
   "methods":[{"name":"callback","parameterTypes":["java.lang.Object[]"] }]
 },
 {
+  "name":"com.sun.jna.Library",
+  "allDeclaredClasses":true,
+  "queryAllPublicMethods":true
+},
+{
+  "name":"com.sun.jna.Structure",
+  "allDeclaredClasses":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicMethods":true
+},
+{
+  "name":"com.sun.jna.Structure$ByReference",
+  "allDeclaredClasses":true,
+  "queryAllPublicMethods":true
+},
+{
   "name":"com.sun.jna.ptr.IntByReference",
   "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.jna.win32.DLLCallback"
 },
 {
   "name":"com.sun.management.GarbageCollectorMXBean",
@@ -217,6 +269,10 @@
 },
 {
   "name":"com.sun.management.HotSpotDiagnosticMXBean",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"com.sun.management.OperatingSystemMXBean",
   "queryAllPublicMethods":true
 },
 {
@@ -487,6 +543,9 @@
   "queryAllPublicMethods":true
 },
 {
+  "name":"junit.framework.ComparisonFailure"
+},
+{
   "name":"kotlin.Metadata"
 },
 {
@@ -549,11 +608,19 @@
   "queryAllPublicConstructors":true
 },
 {
+  "name":"sun.security.provider.DRBG",
+  "methods":[{"name":"<init>","parameterTypes":["java.security.SecureRandomParameters"] }]
+},
+{
   "name":"sun.security.provider.NativePRNG",
   "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["java.security.SecureRandomParameters"] }]
 },
 {
   "name":"sun.security.provider.SHA",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.SHA2$SHA256",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 }
 ]

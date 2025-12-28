@@ -17,18 +17,18 @@ public class MainIBMMQJNA {
 
     public static void main(String[] args) {
         log.info("Starting IBM MQ JNA Test");
-        // Configuration de la connexion
+        // Connection configuration
         String queueManagerName = "QM1";
-        String channelName = "DEV.APP.SVRCONN";  // Canal par défaut dans l'image Docker IBM MQ
+        String channelName = "DEV.APP.SVRCONN";  // Default channel in IBM MQ Docker image
         String connectionName = "localhost(1414)";  // Host:port
 
-        // Préparer le nom du Queue Manager (48 bytes, rempli d'espaces)
+        // Prepare the Queue Manager name (48 bytes, filled with spaces)
         byte[] qmgrName = new byte[IBMMQJNA.MQ_Q_MGR_NAME_LENGTH];
         Arrays.fill(qmgrName, (byte) ' ');
         byte[] qmgrBytes = queueManagerName.getBytes(StandardCharsets.UTF_8);
         System.arraycopy(qmgrBytes, 0, qmgrName, 0, Math.min(qmgrBytes.length, qmgrName.length));
 
-        // Créer et configurer la structure MQCD (Channel Definition)
+        // Create and configure the MQCD structure (Channel Definition)
         MQCD mqcd = new MQCD();
         mqcd.Version = MQCD_VERSION_10;
         mqcd.setChannelName(channelName);
@@ -38,141 +38,141 @@ public class MainIBMMQJNA {
         mqcd.ChannelType = MQCHT_CLNTCONN;
         mqcd.TransportType = MQXPT_TCP;
 
-        // Note: Le mot de passe ne se met pas dans MQCD mais dans MQCSP
-        // Pour DEV.ADMIN.SVRCONN, l'authentification peut être requise
+        // Note: The password is not set in MQCD but in MQCSP
+        // For DEV.ADMIN.SVRCONN, authentication may be required
 
-        // Créer et configurer la structure MQCNO (Connection Options)
+        // Create and configure the MQCNO structure (Connection Options)
         MQCNO mqcno = new MQCNO();
         mqcno.setClientConnection(mqcd);
 
-        // Variables de sortie
+        // Output variables
         IntByReference hConn = new IntByReference(MQHC_UNUSABLE_HCONN);
         IntByReference compCode = new IntByReference();
         IntByReference reason = new IntByReference();
 
-        // Connexion au Queue Manager via TCP/IP
+        // Connection to Queue Manager via TCP/IP
         log.info("========================================");
-        log.info("Connexion au Queue Manager via TCP/IP");
+        log.info("Connection to Queue Manager via TCP/IP");
         log.info("  Queue Manager: {}", queueManagerName);
-        log.info("  Canal: {}", channelName);
-        log.info("  Connexion: {}", connectionName);
+        log.info("  Channel: {}", channelName);
+        log.info("  Connection: {}", connectionName);
         log.info("========================================");
 
         try {
             IBMMQJNA.INSTANCE.MQCONNX(new String(qmgrName), mqcno, hConn, compCode, reason);
 
-            // Vérifier le résultat
+            // Check the result
             if (compCode.getValue() == MQCC_FAILED) {
-                log.error("ERREUR: MQCONNX a échoué");
+                log.error("ERROR: MQCONNX failed");
                 log.error("  Completion Code: {}", compCode.getValue());
                 log.error("  Reason Code: {}", reason.getValue());
                 printReasonCode(reason.getValue());
                 System.exit(1);
             }
 
-            log.info("Connecté avec succès!");
-            log.info("  Handle de connexion: {}", hConn.getValue());
+            log.info("Connected successfully!");
+            log.info("  Connection Handle: {}", hConn.getValue());
             log.info("  Completion Code: {}", compCode.getValue());
 
-            // Déconnexion propre
-            log.info("Déconnexion...");
+            // Clean disconnection
+            log.info("Disconnecting...");
             IBMMQJNA.INSTANCE.MQDISC(hConn, compCode, reason);
 
             if (compCode.getValue() == MQCC_OK) {
-                log.info("Déconnecté avec succès!");
+                log.info("Disconnected successfully!");
             } else {
-                log.warn("Avertissement lors de la déconnexion");
+                log.warn("Warning during disconnection");
                 log.warn("  Completion Code: {}", compCode.getValue());
                 log.warn("  Reason Code: {}", reason.getValue());
             }
 
         } catch (UnsatisfiedLinkError e) {
             log.error("========================================");
-            log.error("ERREUR: Bibliothèque IBM MQ non trouvée!");
+            log.error("ERROR: IBM MQ library not found!");
             log.error("========================================");
-            log.error("La bibliothèque native IBM MQ (mqm.dll ou libmqm.so) n'est pas disponible.");
+            log.error("The native IBM MQ library (mqm.dll or libmqm.so) is not available.");
             log.error("");
-            log.error("Pour résoudre ce problème:");
-            log.error("1. Installez le client IBM MQ:");
+            log.error("To resolve this issue:");
+            log.error("1. Install the IBM MQ client:");
             log.error("   Windows: https://www.ibm.com/support/pages/downloading-ibm-mq-clients");
-            log.error("   Linux: sudo apt-get install ibmmq-client (ou via yum/dnf)");
+            log.error("   Linux: sudo apt-get install ibmmq-client (or via yum/dnf)");
             log.error("");
-            log.error("2. Ajoutez le répertoire contenant mqm.dll/libmqm.so au PATH système");
-            log.error("   Windows: C:\\Program Files\\IBM\\MQ\\bin (ou bin64)");
+            log.error("2. Add the directory containing mqm.dll/libmqm.so to the system PATH");
+            log.error("   Windows: C:\\Program Files\\IBM\\MQ\\bin (or bin64)");
             log.error("   Linux: /opt/mqm/lib64");
             log.error("");
-            log.error("Erreur détaillée: ", e);
+            log.error("Detailed error: ", e);
             System.exit(1);
         } catch (Exception e) {
-            log.error("Erreur inattendue: {}", e.getMessage(), e);
+            log.error("Unexpected error: {}", e.getMessage(), e);
             System.exit(1);
         }
     }
 
     /**
-     * Affiche le message d'erreur correspondant au code raison
+     * Displays the error message corresponding to the reason code
      */
     private static void printReasonCode(int reason) {
         System.err.println("");
         System.err.println("========================================");
-        System.err.println("Diagnostic de l'erreur:");
+        System.err.println("Error Diagnostic:");
         System.err.println("========================================");
         switch (reason) {
             case MQRC_ENVIRONMENT_ERROR:
                 System.err.println("  MQRC_ENVIRONMENT_ERROR (2012)");
                 System.err.println("");
-                System.err.println("  → Erreur d'environnement IBM MQ");
-                System.err.println("  → Les structures MQCD/MQCNO sont probablement mal configurées");
+                System.err.println("  → IBM MQ environment error");
+                System.err.println("  → The MQCD/MQCNO structures are probably misconfigured");
                 System.err.println("");
-                System.err.println("  Causes possibles:");
-                System.err.println("    1. Problème de taille/padding dans les structures JNA");
-                System.err.println("    2. Version de structure incompatible");
-                System.err.println("    3. Architecture 32-bit/64-bit mismatch");
-                System.err.println("    4. Champs de structure non initialisés correctement");
+                System.err.println("  Possible causes:");
+                System.err.println("    1. Size/padding issue in JNA structures");
+                System.err.println("    2. Incompatible structure version");
+                System.err.println("    3. 32-bit/64-bit architecture mismatch");
+                System.err.println("    4. Structure fields not initialized correctly");
                 System.err.println("");
-                System.err.println("  Solutions à essayer:");
-                System.err.println("    • Simplifier MQCD en utilisant VERSION_1 au lieu de VERSION_11");
-                System.err.println("    • Vérifier que JVM et client MQ ont la même architecture (64-bit)");
-                System.err.println("    • Essayer avec le canal DEV.APP.SVRCONN au lieu de DEV.ADMIN.SVRCONN");
-                System.err.println("    • Vérifier les logs du serveur: podman logs QM1");
-                System.err.println("    • Activer le mode debug JNA: -Djna.dump_memory=true");
+                System.err.println("  Solutions to try:");
+                System.err.println("    • Simplify MQCD by using VERSION_1 instead of VERSION_11");
+                System.err.println("    • Verify that JVM and MQ client have the same architecture (64-bit)");
+                System.err.println("    • Try with DEV.APP.SVRCONN channel instead of DEV.ADMIN.SVRCONN");
+                System.err.println("    • Check server logs: podman logs QM1");
+                System.err.println("    • Enable JNA debug mode: -Djna.dump_memory=true");
                 break;
             case MQRC_NOT_AUTHORIZED:
                 System.err.println("  MQRC_NOT_AUTHORIZED (2035)");
                 System.err.println("");
-                System.err.println("  → Problème d'authentification");
-                System.err.println("  → Le canal DEV.ADMIN.SVRCONN nécessite probablement une authentification");
+                System.err.println("  → Authentication problem");
+                System.err.println("  → The DEV.ADMIN.SVRCONN channel probably requires authentication");
                 System.err.println("");
                 System.err.println("  Solutions:");
-                System.err.println("    • Utiliser DEV.APP.SVRCONN (pas d'auth requise)");
-                System.err.println("    • OU implémenter MQCSP pour fournir user/password");
+                System.err.println("    • Use DEV.APP.SVRCONN (no auth required)");
+                System.err.println("    • OR implement MQCSP to provide user/password");
                 break;
             case MQRC_Q_MGR_NOT_AVAILABLE:
                 System.err.println("  MQRC_Q_MGR_NOT_AVAILABLE (2059)");
                 System.err.println("");
-                System.err.println("  → Le Queue Manager n'est pas accessible");
+                System.err.println("  → The Queue Manager is not accessible");
                 System.err.println("");
                 System.err.println("  Solutions:");
-                System.err.println("    • Vérifier que QM1 est bien le nom du Queue Manager");
-                System.err.println("    • Vérifier le nom du canal: DEV.APP.SVRCONN ou DEV.ADMIN.SVRCONN");
-                System.err.println("    • Vérifier la connexion: 172.20.26.188(1414)");
-                System.err.println("    • Tester avec telnet: telnet 172.20.26.188 1414");
+                System.err.println("    • Verify that QM1 is the correct Queue Manager name");
+                System.err.println("    • Verify the channel name: DEV.APP.SVRCONN or DEV.ADMIN.SVRCONN");
+                System.err.println("    • Verify the connection: 172.20.26.188(1414)");
+                System.err.println("    • Test with telnet: telnet 172.20.26.188 1414");
                 break;
             case MQRC_HOST_NOT_AVAILABLE:
                 System.err.println("  MQRC_HOST_NOT_AVAILABLE (2538)");
                 System.err.println("");
-                System.err.println("  → Le serveur n'est pas accessible sur le réseau");
+                System.err.println("  → The server is not accessible on the network");
                 System.err.println("");
                 System.err.println("  Solutions:");
-                System.err.println("    • Vérifier que le conteneur est démarré: podman ps | grep QM1");
-                System.err.println("    • Vérifier l'IP: 172.20.26.188");
-                System.err.println("    • Vérifier le port: 1414");
-                System.err.println("    • Tester: telnet 172.20.26.188 1414");
+                System.err.println("    • Verify that the container is running: podman ps | grep QM1");
+                System.err.println("    • Verify the IP: 172.20.26.188");
+                System.err.println("    • Verify the port: 1414");
+                System.err.println("    • Test: telnet 172.20.26.188 1414");
                 break;
             default:
-                System.err.println("  Code raison: " + reason);
+                System.err.println("  Reason code: " + reason);
                 System.err.println("");
-                System.err.println("  → Consultez la documentation IBM MQ:");
+                System.err.println("  → Consult the IBM MQ documentation:");
                 System.err.println("    https://www.ibm.com/docs/en/ibm-mq/9.3?topic=codes-mqrc-" + reason);
         }
         System.err.println("========================================");

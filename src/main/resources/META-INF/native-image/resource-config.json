@@ -31,6 +31,8 @@
   }, {
     "pattern":"\\Qcom/sun/jna/linux-x86-64/libjnidispatch.so\\E"
   }, {
+    "pattern":"\\Qcom/sun/jna/win32-x86-64/jnidispatch.dll\\E"
+  }, {
     "pattern":"\\Qlogback.xml\\E"
   }, {
     "pattern":"jdk.jfr:\\Qjdk/jfr/internal/types/metadata.bin\\E"
@@ -39,10 +41,22 @@
     "name":"com.ibm.mq.headers.internal.HeaderMessages",
     "locales":["und"]
   }, {
+    "name":"com.ibm.mq.jmqi.internal.amq9204",
+    "locales":["", "fr", "und"]
+  }, {
+    "name":"com.ibm.mq.jmqi.internal.amq9213",
+    "locales":["", "fr", "und"]
+  }, {
+    "name":"com.ibm.mq.jmqi.internal.amq9248",
+    "locales":["fr", "und"]
+  }, {
+    "name":"com.ibm.mq.jmqi.internal.messages",
+    "locales":["", "fr", "und"]
+  }, {
     "name":"com.ibm.msg.client.commonservices.resources.JMSCS_MessageResourceBundle",
-    "locales":["und"]
+    "locales":["", "fr", "und"]
   }, {
     "name":"mqji",
-    "locales":["und"]
+    "locales":["", "fr", "und"]
   }]
 }

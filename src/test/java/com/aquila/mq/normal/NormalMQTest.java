@@ -32,7 +32,7 @@ public class NormalMQTest {
         final MQQueue qag = mqQueueManager.accessQueue(queueName, openOptions);
 //        qle = mqQueueManager.accessQueue(queueName, CMQC.MQOO_OUTPUT);
         MQMessage rcvMessage = new MQMessage();
-        rcvMessage.writeString("Test petit lombric");
+        rcvMessage.writeString("Test message");
         qag.put(rcvMessage);
         qag.get(rcvMessage, gmo);
         int length = rcvMessage.getDataLength();

@@ -77,14 +77,14 @@ public class NormalMQ {
         properties.put(CMQC.USER_ID_PROPERTY, "app"); // "admin");
         properties.put(CMQC.PASSWORD_PROPERTY, "passw0rd");
         log.info("========================================");
-        log.info("Connexion au Queue Manager via TCP/IP");
+        log.info("Connection to Queue Manager via TCP/IP");
         log.info("  Hostname    : {}", properties.get(CMQC.HOST_NAME_PROPERTY));
         log.info("  Port        : {}", properties.get(CMQC.PORT_PROPERTY));
         log.info("  Channel     : {}", properties.get(CMQC.CHANNEL_PROPERTY));
         log.info("  User        : {}", properties.get(CMQC.USER_ID_PROPERTY));
         log.info("  Password    : {}", properties.get(CMQC.PASSWORD_PROPERTY));
-//        log.info("  Canal: {}", channelName);
-//        log.info("  Connexion: {}", connectionName);
+//        log.info("  Channel: {}", channelName);
+//        log.info("  Connection: {}", connectionName);
         log.info("========================================");
         return new MQQueueManager("QM1", properties);
     }
