@@ -132,4 +132,14 @@ public class MQCNO extends Structure {
         this.Options = MQCNO_STANDARD_BINDING;
         this.ClientConnPtr = null;
     }
+
+    /**
+     * Sets security parameters for authentication
+     *
+     * @param mqcsp The MQCSP structure containing credentials
+     */
+    public void setSecurityParms(MQCSP mqcsp) {
+        this.SecurityParmsPtr = mqcsp.getPointer();
+        mqcsp.write();  // Write the structure to memory
+    }
 }

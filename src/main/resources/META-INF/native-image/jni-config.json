@@ -6,6 +6,10 @@
   "name":"[Lcom.sun.management.internal.DiagnosticCommandInfo;"
 },
 {
+  "name":"com.intellij.rt.junit.JUnitStarter",
+  "methods":[{"name":"main","parameterTypes":["java.lang.String[]"] }]
+},
+{
   "name":"com.sun.jna.Callback"
 },
 {

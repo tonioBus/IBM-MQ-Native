@@ -35,7 +35,7 @@ public class MainIBMMQJNATest {
         // Connection configuration
         String queueManagerName = "QM1";
         String channelName = "DEV.APP.SVRCONN";  // Default channel in IBM MQ Docker image
-        String connectionName = "192.168.1.73:1414";  // Host:port
+        String connectionName = "192.168.1.73(1414)";  // Host:port
 
         // Prepare the Queue Manager name (48 bytes, filled with spaces)
         byte[] qmgrName = new byte[IBMMQJNA.MQ_Q_MGR_NAME_LENGTH];

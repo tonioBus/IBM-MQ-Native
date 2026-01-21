@@ -1,13 +1,12 @@
 package com.aquila.mq.jna;
 
-import com.aquila.mq.jna.lib.IBMMQJNA;
-import com.aquila.mq.jna.lib.MQCD;
-import com.aquila.mq.jna.lib.MQCNO;
+import com.aquila.mq.jna.lib.*;
 import com.sun.jna.ptr.IntByReference;
 import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.List;
 
 import static com.ibm.mq.constants.CMQC.*;
 import static com.ibm.mq.constants.CMQXC.*;
@@ -19,7 +18,7 @@ public class MainIBMMQJNA {
         log.info("Starting IBM MQ JNA Test");
         // Connection configuration
         String queueManagerName = "QM1";
-        String channelName = "DEV.APP.SVRCONN";  // Default channel in IBM MQ Docker image
+        String channelName = "DEV.ADMIN.SVRCONN";  // Default channel in IBM MQ Docker image
         String connectionName = "192.168.1.73(1414)";  // Host(port)
 
         // Prepare the Queue Manager name (48 bytes, filled with spaces)
@@ -33,17 +32,17 @@ public class MainIBMMQJNA {
         mqcd.Version = MQCD_VERSION_10;
         mqcd.setChannelName(channelName);
         mqcd.setConnectionName(connectionName);
-        mqcd.setUser("admin");
-        mqcd.setPassword("passw0rd");
         mqcd.ChannelType = MQCHT_CLNTCONN;
         mqcd.TransportType = MQXPT_TCP;
 
-        // Note: The password is not set in MQCD but in MQCSP
-        // For DEV.ADMIN.SVRCONN, authentication may be required
+        // Create MQCSP for authentication (required for DEV.ADMIN.SVRCONN)
+        MQCSP mqcsp = new MQCSP();
+        mqcsp.setCredentials("admin", "passw0rd");
 
         // Create and configure the MQCNO structure (Connection Options)
         MQCNO mqcno = new MQCNO();
         mqcno.setClientConnection(mqcd);
+        mqcno.setSecurityParms(mqcsp);
 
         // Output variables
         IntByReference hConn = new IntByReference(MQHC_UNUSABLE_HCONN);
@@ -73,6 +72,21 @@ public class MainIBMMQJNA {
             log.info("Connected successfully!");
             log.info("  Connection Handle: {}", hConn.getValue());
             log.info("  Completion Code: {}", compCode.getValue());
+
+            // After connecting with MQCONNX
+            try (PCFAgent pcfAgent = new PCFAgent(hConn.getValue())) {
+                pcfAgent.connect();
+
+                // Get all queues
+                List<QueueInfo> allQueues = pcfAgent.inquireQueues("*", PCFConstants.MQQT_LOCAL);
+
+                // Get only local queues matching a pattern
+                // List<QueueInfo> devQueues = pcfAgent.inquireQueues("DEV.*", PCFConstants.MQQT_LOCAL);
+
+                for (QueueInfo queue : allQueues) {
+                    System.out.println(queue.getName() + " - " + queue.getTypeName());
+                }
+            }
 
             // Clean disconnection
             log.info("Disconnecting...");
