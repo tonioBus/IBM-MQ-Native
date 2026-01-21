@@ -20,10 +20,22 @@ public class MainIBMMQJNATest {
     @Test
     public void testAllOperations() {
         log.info("Starting IBM MQ JNA Test");
+        /*
+        "192.168.1.73(1414)": {
+    "name": "QM1",
+    "host": "192.168.1.73",
+    "port": 1414,
+    "channel": "DEV.APP.SVRCONN",
+    "queueManager": "QM1",
+    "username": "admin",
+    "password": "passw0rd",
+    "sslEnabled": false
+  },
+         */
         // Connection configuration
         String queueManagerName = "QM1";
         String channelName = "DEV.APP.SVRCONN";  // Default channel in IBM MQ Docker image
-        String connectionName = "localhost(1414)";  // Host:port
+        String connectionName = "192.168.1.73:1414";  // Host:port
 
         // Prepare the Queue Manager name (48 bytes, filled with spaces)
         byte[] qmgrName = new byte[IBMMQJNA.MQ_Q_MGR_NAME_LENGTH];
@@ -36,7 +48,7 @@ public class MainIBMMQJNATest {
         mqcd.Version = MQCD_VERSION_10;
         mqcd.setChannelName(channelName);
         mqcd.setConnectionName(connectionName);
-        mqcd.setUser("app");
+        mqcd.setUser("admin");
         mqcd.setPassword("passw0rd");
         mqcd.ChannelType = MQCHT_CLNTCONN;
         mqcd.TransportType = MQXPT_TCP;

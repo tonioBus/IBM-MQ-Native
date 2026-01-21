@@ -42,21 +42,21 @@
     "locales":["und"]
   }, {
     "name":"com.ibm.mq.jmqi.internal.amq9204",
-    "locales":["", "fr", "und"]
+    "locales":["fr", "und"]
   }, {
     "name":"com.ibm.mq.jmqi.internal.amq9213",
-    "locales":["", "fr", "und"]
+    "locales":["fr", "und"]
   }, {
     "name":"com.ibm.mq.jmqi.internal.amq9248",
     "locales":["fr", "und"]
   }, {
     "name":"com.ibm.mq.jmqi.internal.messages",
-    "locales":["", "fr", "und"]
+    "locales":["fr", "und"]
   }, {
     "name":"com.ibm.msg.client.commonservices.resources.JMSCS_MessageResourceBundle",
-    "locales":["", "fr", "und"]
+    "locales":["fr", "und"]
   }, {
     "name":"mqji",
-    "locales":["", "fr", "und"]
+    "locales":["fr", "und"]
   }]
 }
